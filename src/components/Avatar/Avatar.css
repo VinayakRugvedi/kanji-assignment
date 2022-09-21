@@ -1,0 +1,6 @@
+.custom-avatar {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 0 5px blue;
+}
