@@ -1,0 +1,16 @@
+.custom-button-container {
+    border: none;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.custom-button-outline {
+    border: 2px solid var(--border-color);
+    background-color: white;
+}
+.custom-button-outline:hover {
+    background-color: var(--border-color);
+    transition: background-color 0.2s;
+}
