@@ -6,11 +6,11 @@
 }
 
 .custom-label-success {
-    background-color: rgba(29, 201, 183, 0.1);
-    color: #1dc9b7;
+    background-color: var(--success-background-color);
+    color: var(--success-color);
 }
 
 .custom-label-failure {
-    background-color: rgba(253, 57, 122, 0.1);
-    color: #fd397a;
+    background-color:  var(--failure-background-color);
+    color: var(--failure-color);
 }
