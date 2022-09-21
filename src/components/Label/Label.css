@@ -1,0 +1,16 @@
+.custon-label-container {
+    cursor: text !important;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 3px;
+}
+
+.custom-label-success {
+    background-color: rgba(29, 201, 183, 0.1);
+    color: #1dc9b7;
+}
+
+.custom-label-failure {
+    background-color: rgba(253, 57, 122, 0.1);
+    color: #fd397a;
+}
