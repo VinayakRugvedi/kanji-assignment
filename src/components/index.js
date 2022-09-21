@@ -1,3 +1,9 @@
 import Label from "./Label/Label";
+import Button from "./Button/Button";
+import Avatar from "./Avatar/Avatar";
 
-export {Label};
+export {
+    Label,
+    Button,
+    Avatar
+};
