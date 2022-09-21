@@ -1,0 +1,11 @@
+.create-nft-page-container {
+    /* padding: 3rem; */
+    background-color: white;
+}
+
+.create-nft-page-container .sub-header-container {
+    padding: 0.3rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
