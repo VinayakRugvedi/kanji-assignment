@@ -1,0 +1,27 @@
+.table-container {
+    width: 100%;
+}
+
+.table-container thead {
+    background-color: var(--subheader-background-color);
+}
+
+.table-container th {
+    padding: 1rem;
+    text-align: left;
+    color: rgba(0, 0, 0, 0.6)
+}
+
+.table-container td {
+    padding: 1rem 1rem;
+    text-align: left;
+}
+
+.table-container td {
+    border-bottom: solid 1px var(--border-color);
+}
+
+.table-container tbody tr:hover {
+    background-color: var(--subheader-background-color);
+    cursor: pointer;
+}
