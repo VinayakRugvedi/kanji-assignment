@@ -25,3 +25,15 @@
     background-color: var(--subheader-background-color);
     cursor: pointer;
 }
+
+.table-container .name-checkbox-wrapper {
+    visibility: hidden;
+}
+
+.table-container tbody tr:hover .name-checkbox-wrapper{
+    visibility: visible;
+}
+
+.table-container .visibility-visible {
+    visibility: visible;
+}
