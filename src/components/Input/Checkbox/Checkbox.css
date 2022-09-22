@@ -1,0 +1,58 @@
+.custom-checkbox-container {
+  display: inline;
+  border-bottom: 1px solid #c6c6c6;
+  margin-bottom: 20px;
+}
+
+.custom-checkbox-container:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.custom-checkbox-container label {
+  cursor: pointer;
+}
+
+/* Customizing the checkbox */
+
+.custom-checkbox-container input[type="checkbox"] {
+  /* removing default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  /* creating a custom design */
+  width: 1.6em;
+  height: 1.6em;
+  border-radius: 0.15em;
+  margin-right: 0.5em;
+  border: 0.15em solid rgb(158, 150, 150);
+  outline: none;
+  cursor: pointer;
+}
+
+.custom-checkbox-container input.checked {
+  border: 0.15em solid var(--primary-color);
+  background-color: var(--primary-color);
+  position: relative;
+}
+
+.custom-checkbox-container input.checked::before {
+  content: "\2714";
+  font-size: 1.5em;
+  color: #fff;
+  position: absolute;
+  right: 1px;
+  top: -5px;
+}
+
+.custom-checkbox-container input[type="checkbox"]:disabled {
+  border-color: var(--disabled-color);
+  background-color: var(--disabled-color);
+}
+
+.custom-checkbox-container input[type="checkbox"]:disabled + span {
+  color: var(--disabled-color);
+}
+/* 
+.custom-checkbox-container input[type="checkbox"]:focus {
+  box-shadow: 0 0 20px #007a7e;
+} */
