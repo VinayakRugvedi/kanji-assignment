@@ -1,11 +1,27 @@
 .create-nft-page-container {
     /* padding: 3rem; */
     background-color: white;
+    border-radius: 5px;
 }
 
 .create-nft-page-container .sub-header-container {
-    padding: 0.3rem 1rem;
+    padding: 1.5rem 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.sub-header-container .title-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-header-container .title-container .title {
+    margin: 0.3rem 0;
+    font-weight: 500;
+}
+
+.sub-header-container .title-container .description {
+    font-size: 0.9rem;
+    color: grey;
 }
