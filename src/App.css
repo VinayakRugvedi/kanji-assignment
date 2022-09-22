@@ -5,11 +5,22 @@
   --failure-color: #fd397a;
   --border-color: rgba(0, 0, 0, 0.05);
   --subheader-background-color: rgba(211, 211, 248, 0.4);
+  --disabled-color: #c0c0c0;
+  --primary-color: rgb(66, 65, 65);
 }
 
 .App {
   background-color: #E2E2E2;
-  padding: 3rem;
+  padding: 5rem 15rem;
+  min-height: 100vh;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
+.visibility-visible {
+  visibility: visible;
 }
 
 @keyframes App-logo-spin {
