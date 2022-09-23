@@ -1,0 +1,38 @@
+.custom-text-input-container {
+  position: relative;
+}
+
+.custom-text-input-container .label-text {
+  margin-bottom: 0.2rem;
+}
+
+.custom-text-input-container .error-text {
+  color: var(--failure-color);
+  margin-top: 0.2rem;
+}
+
+.custom-text-input-container input[type="text"] {
+  border: 2px solid var(--border-color);
+  padding: 0.8rem 0.8rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  width: stretch;
+}
+
+.custom-text-input-container input[type="text"]:disabled {
+  border-color: var(--disabled-color);
+  background-color: var(--disabled-color);
+}
+
+.custom-text-input-container input[type="text"]:disabled + div {
+  color: var(--disabled-color);
+}
+
+.custom-text-input-container input[type="text"]:hover {
+  border-color: var(--primary-color);
+  outline: none;
+}
+
+.custom-text-input-container input[type="text"]:focus {
+  outline: none;
+}
