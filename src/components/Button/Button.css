@@ -14,3 +14,15 @@
     background-color: var(--border-color);
     transition: background-color 0.2s;
 }
+
+.custom-button-primary {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: 500;
+}
+
+.custom-button-secondary {
+    background-color: var(--secondary-color);
+    color: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+}
