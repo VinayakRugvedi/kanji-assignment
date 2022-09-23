@@ -1,0 +1,16 @@
+.custom-empty-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 2rem;
+}
+
+.custom-empty-container .empty-icon-container {
+    font-size: 5rem;
+}
+
+.custom-empty-container .empty-text {
+    margin: 0;
+}
