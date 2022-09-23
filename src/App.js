@@ -4,7 +4,7 @@ import {CreateNft} from "pages";
 function App() {
   return (
     <div className="App">
-      <CreateNft />
+      <main><CreateNft /></main>
     </div>
   );
 }
