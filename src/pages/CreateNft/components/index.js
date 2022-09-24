@@ -1,3 +1,7 @@
 import Table from "./Table/Table";
+import Edit from "./Edit/Edit";
 
-export {Table};
+export {
+    Table,
+    Edit
+};
