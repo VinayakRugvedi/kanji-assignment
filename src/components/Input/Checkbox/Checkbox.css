@@ -1,7 +1,5 @@
 .custom-checkbox-container {
   display: inline;
-  border-bottom: 1px solid #c6c6c6;
-  margin-bottom: 20px;
 }
 
 .custom-checkbox-container:last-child {
@@ -14,7 +12,6 @@
 }
 
 /* Customizing the checkbox */
-
 .custom-checkbox-container input[type="checkbox"] {
   /* removing default appearance */
   -webkit-appearance: none;
@@ -52,7 +49,7 @@
 .custom-checkbox-container input[type="checkbox"]:disabled + span {
   color: var(--disabled-color);
 }
-/* 
-.custom-checkbox-container input[type="checkbox"]:focus {
-  box-shadow: 0 0 20px #007a7e;
-} */
+
+.custom-checkbox-container input[type="checkbox"]:hover {
+  border-color: var(--primary-color);
+}
