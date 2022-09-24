@@ -15,14 +15,16 @@ const propTypes = {
     itemsMapping: PropTypes.object.isRequired,
     selectedItemsMapping: PropTypes.object.isRequired,
     handleItemSelection: PropTypes.func.isRequired,
-    handleSearch: PropTypes.func.isRequired
+    handleSearch: PropTypes.func.isRequired,
+    handleCanEdit: PropTypes.func.isRequired
 };
 
 const CreateNft = ({
     itemsMapping,
     selectedItemsMapping,
     handleItemSelection,
-    handleSearch
+    handleSearch,
+    handleCanEdit
 }) => {
     // TIP: We can introduce a key within itemsMapping to identify the items as search results or not
     const isItemsPresent = Object.keys(itemsMapping).length > 0;
@@ -37,7 +39,12 @@ const CreateNft = ({
                 </div>
                 <InputSearch handleSearch={handleSearch} />
                 <div className={`visibility-${isItemsSelected ? "visible" : "hidden"}`}>
-                    <Button type={ButtonTypes.Outline}>Edit Properties</Button>
+                    <Button
+                        type={ButtonTypes.Outline}
+                        handleClick={() => handleCanEdit()}
+                    >
+                        Edit Properties
+                    </Button>
                 </div>
             </div>
             <div className="table-wrapper">

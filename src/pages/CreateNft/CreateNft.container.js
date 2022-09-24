@@ -1,28 +1,37 @@
 import {useState} from "react";
 
-import {nftItems} from "utils";
+import {
+    nftItems,
+    triggerToast
+} from "utils";
+import {Edit} from "./components";
 import CreateNft from "./CreateNft";
+
+const getTransformedNftItem = (item) => {
+    const propertyNames = Object.keys(item.properties);
+    const transformedNames = [];
+    for (let name of propertyNames) {
+        transformedNames.push(name[0].toUpperCase() + name.slice(1, name.length))
+    }
+    item.propertyNamesString = transformedNames.length > 0 ? transformedNames.join(" | ") : "";
+
+    const values = Object.values(item.properties);
+    const transformedValues = [];
+    for (let value of values) {
+        for (let valueItem of value) {
+            transformedValues.push(valueItem[0].toUpperCase() + valueItem.slice(1, valueItem.length))
+        }
+    }
+    item.propertyValuesString = transformedValues.length > 0 ? transformedValues.join(" | ") : "";
+
+    return item;
+};
 
 const getNftItemsMapping = () => {
     const itemsMapping = {};
     for (let item of nftItems) {
-        itemsMapping[item.id] = item;
-
-        const propertyNames = Object.keys(item.properties);
-        const transformedNames = [];
-        for (let name of propertyNames) {
-            transformedNames.push(name[0].toUpperCase() + name.slice(1, name.length))
-        }
-        itemsMapping[item.id].propertyNamesString = transformedNames.length > 0 ? transformedNames.join(" | ") : "";
-
-        const values = Object.values(item.properties);
-        const transformedValues = [];
-        for (let value of values) {
-            for (let valueItem of value) {
-                transformedValues.push(valueItem[0].toUpperCase() + valueItem.slice(1, valueItem.length))
-            }
-        }
-        itemsMapping[item.id].propertyValuesString = transformedValues.length > 0 ? transformedValues.join(" | ") : "";
+        const transformedItem = getTransformedNftItem(item);
+        itemsMapping[item.id] = transformedItem;
     }
 
     return itemsMapping;
@@ -31,7 +40,9 @@ const getNftItemsMapping = () => {
 const CreateNftContainer = () => {
     const [itemsMapping, setItemsMapping] = useState(getNftItemsMapping());
     const [selectedItemsMapping, setSelectedItemsMapping] = useState({});
+    const [canEdit, setCanEdit] = useState(false);
 
+    //TIP: Integerate useCallback for these handlers
     const handleItemSelection = (selectedItem = null) => {
         if (!selectedItem) {
             if (Object.keys(selectedItemsMapping).length === Object.keys(itemsMapping).length) {
@@ -68,6 +79,22 @@ const CreateNftContainer = () => {
         }
     };
 
+    const handleCanEdit = () => {
+        setCanEdit((previous) => !previous);
+    };
+
+    const updateItemsMapping = (updatedItemsMapping) => {
+        const itemsMappingCopy = {...itemsMapping};
+        for (const [id, item] of Object.entries(updatedItemsMapping)) {
+            const updatedItem = getTransformedNftItem(item);
+            itemsMappingCopy[id] = updatedItem;
+        };
+        setItemsMapping(itemsMappingCopy);
+        handleCanEdit();
+        setSelectedItemsMapping({});
+        triggerToast("Successfully updated the NFT");
+    };
+
     return (
         <>
             <CreateNft
@@ -75,6 +102,13 @@ const CreateNftContainer = () => {
                 selectedItemsMapping={selectedItemsMapping}
                 handleItemSelection={handleItemSelection}
                 handleSearch={handleSearch}
+                handleCanEdit={handleCanEdit}
+            />
+            <Edit
+                canEdit={canEdit}
+                handleCanEdit={handleCanEdit}
+                selectedItemsMapping={selectedItemsMapping}
+                updateItemsMapping={updateItemsMapping}
             />
         </>
     );
