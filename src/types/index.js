@@ -11,7 +11,15 @@ const ButtonTypes = {
     Outline: "outline"
 };
 
+const ToastTypes = {
+    Success: "success",
+    Info: "info",
+    Warning: "warning",
+    Error: "error"
+};
+
 export {
     LabelTypes,
-    ButtonTypes
+    ButtonTypes,
+    ToastTypes
 };

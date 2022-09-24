@@ -1,3 +1,6 @@
+import {toast} from "react-toastify";
+import {ToastTypes} from "types";
+
 // https://github.com/Laosing/cute-cat-avatars
 
 const nftItems = [
@@ -24,8 +27,8 @@ const nftItems = [
         id: "3",
         name: "Cool Cats #003",
         properties: {},
-        isComplete: false,
-        statusString: "Incomplete",
+        isComplete: true,
+        statusString: "Complete",
         imageUrl: "https://cute-cat-avatars.fly.dev/api/v1/bug"
     },
     {
@@ -84,6 +87,19 @@ const nftItems = [
         statusString: "Incomplete",
         imageUrl: "https://cute-cat-avatars.fly.dev/api/v1/book"
     }
-]
+];
 
-export {nftItems}
+const triggerToast = (message, type = ToastTypes.Success) => {
+    const options = {
+        type,
+        position: toast.POSITION.TOP_RIGHT
+    };
+
+    toast(message, options);
+    return;
+};
+
+export {
+    nftItems,
+    triggerToast
+};
