@@ -9,7 +9,7 @@
 .table-container th {
     padding: 1rem;
     text-align: left;
-    color: rgba(0, 0, 0, 0.6)
+    color: rgba(0, 0, 0, 0.6);
 }
 
 .table-container td {
@@ -36,4 +36,9 @@
 
 .table-container .visibility-visible {
     visibility: visible;
+}
+
+.table-container .sort-icons-container {
+    margin-left: 0.3rem;
+    translate: 0 10%;
 }

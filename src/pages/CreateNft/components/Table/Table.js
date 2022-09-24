@@ -1,6 +1,11 @@
 import {useMemo} from "react";
 import { useTable, useSortBy } from "react-table";
 import PropTypes from "prop-types";
+import {
+    FaSort,
+    FaSortUp,
+    FaSortDown
+ } from "react-icons/fa";
 
 import {
     Label,
@@ -137,16 +142,44 @@ const Table = ({
                         {
                             index === 0 ? (
                                 <div
-                                    style={{display: "flex", alignItems: "center"}}
+                                    style={{display: "inline-flex", alignItems: "center"}}
                                     onClick={(event) => {
-                                        event.stopPropagation();
-                                        handleItemSelection();
+                                        let isColumnNameClicked = false;
+                                        if ("data-column-name" in event.target.attributes) {
+                                            isColumnNameClicked = true;
+                                        }
+                                        !isColumnNameClicked && event.stopPropagation();
+                                        !isColumnNameClicked && handleItemSelection();
                                     }}
+                                    role="button"
                                 >
                                     <InputCheckbox style={{marginRight: "0.8rem"}} />
-                                    {column.render("Header")}
+                                    <span data-column-name>{column.render("Header")}</span>
+                                    <span className="sort-icons-container">
+                                        {
+                                            column.isSorted ?
+                                                column.isSortedDesc ? <FaSortDown /> : <FaSortUp /> : 
+                                                <FaSort />
+                                        }
+                                    </span>
                                 </div>
-                            ) : column.render("Header")}
+                            ) : (
+                                <span>
+                                    {column.render("Header")}
+                                    {
+                                        column.canSort && (
+                                            <span className="sort-icons-container">
+                                                {
+                                                    column.isSorted ?
+                                                        column.isSortedDesc ? <FaSortDown /> : <FaSortUp /> : 
+                                                        <FaSort />
+                                                }
+                                            </span>
+                                        )
+                                    }
+                                </span>
+                            )
+                        }
                     </th>
                 ))
             }
@@ -162,6 +195,7 @@ const Table = ({
             <tr
                 {...row.getRowProps()}
                 onClick={() => handleItemSelection(row.original)}
+                role="button"
             >
                 {row.cells.map((cell) => {
                     return (
