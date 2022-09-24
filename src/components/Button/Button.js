@@ -15,13 +15,15 @@ const Button = ({
     ...props
 }) => {
     return (
-        <button 
-            className={`custom-button-container custom-button-${type}`}
-            onClick={handleClick}
-            {...props}
-        >
-            {children}
-        </button>
+        <div className="custom-button-container">
+            <button 
+                className={`custom-button custom-button-${type}`}
+                onClick={handleClick}
+                {...props}
+            >
+                {children}
+            </button>
+        </div>
     );
 }
 
