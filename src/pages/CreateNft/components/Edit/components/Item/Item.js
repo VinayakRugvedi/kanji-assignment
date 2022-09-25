@@ -7,7 +7,7 @@ import {
     Button
 } from "components";
 import {ButtonTypes} from "types";
-import {Form} from "./components";
+import Form from "../Form/Form";
 import "./Item.css";
 
 const propTypes = {
