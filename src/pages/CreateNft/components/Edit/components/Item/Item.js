@@ -15,7 +15,10 @@ const propTypes = {
     item: PropTypes.object.isRequired,
     formData: PropTypes.object.isRequired,
     handleNameUpdate: PropTypes.func.isRequired,
-    handleSave: PropTypes.func.isRequired
+    handleSave: PropTypes.func.isRequired,
+    handleAddProperty: PropTypes.func.isRequired,
+    propertyValuesMapping: PropTypes.object.isRequired,
+    handleUpdateProperties: PropTypes.func.isRequired
 };
 
 const Item = ({
@@ -23,7 +26,10 @@ const Item = ({
     item,
     formData,
     handleNameUpdate,
-    handleSave
+    handleSave,
+    handleAddProperty,
+    propertyValuesMapping,
+    handleUpdateProperties
 }) => {
     return (
         <SidePanel>
@@ -48,6 +54,9 @@ const Item = ({
                     <Form
                         formData={formData}
                         handleNameUpdate={handleNameUpdate}
+                        handleAddProperty={handleAddProperty}
+                        propertyValuesMapping={propertyValuesMapping}
+                        handleUpdateProperties={handleUpdateProperties}
                     />
                 </div>
 
