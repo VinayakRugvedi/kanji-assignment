@@ -8,7 +8,8 @@ import SidePanel from "./SidePanel/SidePanel";
 import {
     InputCheckbox,
     InputSearch,
-    InputText
+    InputText,
+    InputSelect
 } from "./Input"
 
 export {
@@ -18,6 +19,7 @@ export {
     InputCheckbox,
     InputSearch,
     InputText,
+    InputSelect,
     Empty,
     SidePanel
 };
