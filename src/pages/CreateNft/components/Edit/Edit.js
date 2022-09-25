@@ -6,14 +6,16 @@ const propTypes = {
     canEdit: PropTypes.bool.isRequired,
     handleCanEdit: PropTypes.func.isRequired,
     selectedItemsMapping: PropTypes.object.isRequired,
-    updateItemsMapping: PropTypes.func.isRequired
+    updateItemsMapping: PropTypes.func.isRequired,
+    propertyValuesMapping: PropTypes.object.isRequired
 };
 
 const Edit = ({
     canEdit,
     handleCanEdit,
     selectedItemsMapping,
-    updateItemsMapping
+    updateItemsMapping,
+    propertyValuesMapping
 }) => {
     const isSingleItem = Object.keys(selectedItemsMapping).length === 1;
 
@@ -36,6 +38,7 @@ const Edit = ({
                         handleClose={handleClose}
                         item={item}
                         updateItemsMapping={updateItemsMapping}
+                        propertyValuesMapping={propertyValuesMapping}
                     />
                 ) : null
             }
