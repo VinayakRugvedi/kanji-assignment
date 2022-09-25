@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import "./Checkbox.css";
 
@@ -22,6 +22,9 @@ const Checkbox = ({
 }) => {
     const defaultChecked = checked ? checked : false;
     const [isChecked, setIsChecked] = useState(defaultChecked);
+    useEffect(() => {
+      setIsChecked(checked);
+    }, [checked]);
 
     const onChange = () => {
         setIsChecked((previous) => !previous);
