@@ -34,6 +34,8 @@ const Table = ({
     return dataItems;
   }, [itemsMapping]);
 
+  const isAllItemsSelected = Object.keys(selectedItemsMapping).length === Object.keys(itemsMapping).length;
+
   // TIP: We can transform the data as per our needs and get rid of "Cell" property
   // TIP: We can also have a utility which generates/returns the columns for us
   const columns = useMemo(
@@ -139,7 +141,10 @@ const Table = ({
                                     }}
                                     role="button"
                                 >
-                                    <InputCheckbox style={{marginRight: "0.8rem"}} />
+                                    <InputCheckbox
+                                        style={{marginRight: "0.8rem"}}
+                                        checked={isAllItemsSelected}
+                                    />
                                     <span data-column-name>{column.render("Header")}</span>
                                     <span className="sort-icons-container">
                                         {
