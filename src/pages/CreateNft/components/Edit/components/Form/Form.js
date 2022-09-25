@@ -16,7 +16,13 @@ const propTypes = {
     handleNameUpdate: PropTypes.func.isRequired,
     handleAddProperty: PropTypes.func.isRequired,
     propertyValuesMapping: PropTypes.object.isRequired,
-    handleUpdateProperties: PropTypes.func.isRequired
+    handleUpdateProperties: PropTypes.func.isRequired,
+    emptyPropertiesMessage: PropTypes.string
+};
+
+const defaultProps = {
+    handleNameUpdate: () => {},
+    emptyPropertiesMessage: "No properties are added yet."
 };
 
 const Form = ({
@@ -24,9 +30,11 @@ const Form = ({
     handleNameUpdate,
     handleAddProperty,
     propertyValuesMapping,
-    handleUpdateProperties
+    handleUpdateProperties,
+    emptyPropertiesMessage
 }) => {
     const isPropertiesPresent = Object.keys(formData.properties).length > 0;
+    const isNamePresent = "name" in formData;
 
     const propertyNameOptions = [], propertyValueOptions = {};
     for (const [property, values] of Object.entries(propertyValuesMapping)) {
@@ -103,7 +111,7 @@ const Form = ({
             <div>
                 <Empty
                     hideIcon
-                    textString="No properties are added yet."
+                    textString={emptyPropertiesMessage}
                 />
             </div>
         );
@@ -111,13 +119,18 @@ const Form = ({
 
     return (
         <form className="edit-item-form-container">
-            <InputText
-                label="Name"
-                isRequired
-                value={formData.name.value}
-                errorString={formData.name.errorString}
-                handleChange={handleNameUpdate}
-            />
+            {
+                isNamePresent ? (
+                    <InputText
+                        label="Name"
+                        isRequired
+                        value={formData.name.value}
+                        errorString={formData.name.errorString}
+                        handleChange={handleNameUpdate}
+                    />
+                ) : null
+            }
+
             <div>
                 {propertiesContent}
                 <div
@@ -133,5 +146,6 @@ const Form = ({
 };
 
 Form.propTypes = propTypes;
+Form.defaultProps = defaultProps;
 
 export default Form;
