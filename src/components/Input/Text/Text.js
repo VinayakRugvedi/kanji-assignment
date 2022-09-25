@@ -62,7 +62,7 @@ const Text = ({
                 </div>
             </label>
         </div>
-    )
+    );
 };
 
 Text.propTypes = propTypes;
