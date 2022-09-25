@@ -66,17 +66,11 @@ const Table = ({
         accessor: "propertyNames",
         disableSortBy: true,
         Cell: ({row: {original}}) => {
-            let propertyNames = Object.keys(original.properties);
-            const transformedNames = [];
-            for (let name of propertyNames) {
-                transformedNames.push(name[0].toUpperCase() + name.slice(1, name.length))
-            }
-
             return (
                 <>
                     {
-                        transformedNames.length ?
-                        transformedNames.join(" | ") :
+                        original.propertyNamesString.length ?
+                        original.propertyNamesString :
                         <span style={{color: "rgba(0, 0, 0, 0.6"}}>None</span>
                     }
                 </>
@@ -88,19 +82,11 @@ const Table = ({
         accessor: "propertyValues",
         disableSortBy: true,
         Cell: ({row: {original}}) => {
-            let values = Object.values(original.properties);
-            const transformedValues = [];
-            for (let value of values) {
-                for (let item of value) {
-                    transformedValues.push(item[0].toUpperCase() + item.slice(1, item.length))
-                }
-            }
-
             return (
                 <>
                     {
-                        transformedValues.length ?
-                        transformedValues.join(" | ") :
+                        original.propertyValuesString.length ?
+                        original.propertyValuesString :
                         <span style={{color: "rgba(0, 0, 0, 0.6"}}>None</span>
                     }
                 </>
