@@ -16,7 +16,8 @@ const propTypes = {
     selectedItemsMapping: PropTypes.object.isRequired,
     handleItemSelection: PropTypes.func.isRequired,
     handleSearch: PropTypes.func.isRequired,
-    handleCanEdit: PropTypes.func.isRequired
+    handleCanEdit: PropTypes.func.isRequired,
+    searchResults: PropTypes.object.isRequired
 };
 
 const CreateNft = ({
@@ -24,11 +25,15 @@ const CreateNft = ({
     selectedItemsMapping,
     handleItemSelection,
     handleSearch,
-    handleCanEdit
+    handleCanEdit,
+    searchResults
 }) => {
-    // TIP: We can introduce a key within itemsMapping to identify the items as search results or not
-    const isItemsPresent = Object.keys(itemsMapping).length > 0;
+    const hasSearched = searchResults.searchString.length > 0;
+    const isSearchItemsPresent = Object.keys(searchResults).length > 1;
     const isItemsSelected = Object.keys(selectedItemsMapping).length > 0;
+
+    const searchResultsCopy = {...searchResults};
+    delete searchResultsCopy.searchString;
 
     return (
         <div className="create-nft-page-container">
@@ -49,11 +54,11 @@ const CreateNft = ({
             </div>
             <div className="table-wrapper">
                 <Table
-                    itemsMapping={itemsMapping}
+                    itemsMapping={hasSearched ? searchResultsCopy :itemsMapping}
                     handleItemSelection={handleItemSelection}
                     selectedItemsMapping={selectedItemsMapping}
                 />
-                <div className={`visibility-${!isItemsPresent ? "visible" : "hidden"} empty-wrapper`}>
+                <div className={`visibility-${hasSearched && !isSearchItemsPresent ? "visible" : "hidden"} empty-wrapper`}>
                     <Empty textString="No search results were found. Please update your search."/>
                 </div>
             </div>

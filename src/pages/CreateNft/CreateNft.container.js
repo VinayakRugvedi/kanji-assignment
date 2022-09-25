@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useState, useCallback} from "react";
 
 import {
     nftItems,
@@ -37,10 +37,20 @@ const getNftItemsMapping = () => {
     return itemsMapping;
 };
 
+const getPropertyValuesMapping = () => {
+    return {
+        eyes: ["green", "black", "blue"],
+        hair: ["blond", "ginger", "black", "brown"],
+        rarity: ["rare", "very rare", "common"]
+    };
+};
+
 const CreateNftContainer = () => {
     const [itemsMapping, setItemsMapping] = useState(getNftItemsMapping());
     const [selectedItemsMapping, setSelectedItemsMapping] = useState({});
+    const [propertyValuesMapping, setPropertyValuesMapping] = useState(getPropertyValuesMapping());
     const [canEdit, setCanEdit] = useState(false);
+    const [searchResults, setSearchResults] = useState({searchString: ""});
 
     //TIP: Integerate useCallback for these handlers
     const handleItemSelection = (selectedItem = null) => {
@@ -62,22 +72,32 @@ const CreateNftContainer = () => {
         }
     };
 
-    const handleSearch = (searchString = "") => {
-        searchString = searchString.toLowerCase();
-        const nftItemsMapping = getNftItemsMapping();
-        if (searchString.length === 0) {
-            setItemsMapping(nftItemsMapping);
-        } else {
-            const searchResults = {};
-            for (let item in nftItemsMapping) {
-                const searchContextString = `${nftItemsMapping[item].propertyNamesString.toLowerCase()} ${nftItemsMapping[item].propertyValuesString.toLowerCase()}`;
-                if (searchContextString.includes(searchString)) {
-                    searchResults[item] = nftItemsMapping[item];
+    const handleSearch = () => {
+        let timer;
+        return (searchString = "") => {
+            clearTimeout(timer);
+            timer = setTimeout(() => {
+                searchString = searchString.toLowerCase();
+                if (searchString.length === 0) {
+                    setSearchResults({
+                        searchString: ""
+                    });
+                } else {
+                    const searchResultsCopy = {
+                        searchString
+                    };
+                    for (let item in itemsMapping) {
+                        const searchContextString = `${itemsMapping[item].propertyNamesString.toLowerCase()} ${itemsMapping[item].propertyValuesString.toLowerCase()}`;
+                        if (searchContextString.includes(searchString)) {
+                            searchResultsCopy[item] = {...itemsMapping[item]};
+                        }
+                    }
+                    setSearchResults(searchResultsCopy);
                 }
-            }
-            setItemsMapping(searchResults);
-        }
+            }, 500);
+        };
     };
+    const debouncedHandleSearch = useCallback(handleSearch(), [itemsMapping]);
 
     const handleCanEdit = () => {
         setCanEdit((previous) => !previous);
@@ -85,11 +105,21 @@ const CreateNftContainer = () => {
 
     const updateItemsMapping = (updatedItemsMapping) => {
         const itemsMappingCopy = {...itemsMapping};
+        const searchResultsCopy = {...searchResults};
         for (const [id, item] of Object.entries(updatedItemsMapping)) {
             const updatedItem = getTransformedNftItem(item);
             itemsMappingCopy[id] = updatedItem;
+            if (searchResults.searchString.length > 0 && searchResultsCopy[id]) {
+                const searchContextString = `${updatedItem.propertyNamesString.toLowerCase()} ${updatedItem.propertyValuesString.toLowerCase()}`;
+                if (searchContextString.includes(searchResults.searchString)) {
+                    searchResultsCopy[id] = updatedItem;
+                } else {
+                    delete searchResultsCopy[id];
+                }
+            }
         };
         setItemsMapping(itemsMappingCopy);
+        setSearchResults(searchResultsCopy);
         handleCanEdit();
         setSelectedItemsMapping({});
         triggerToast("Successfully updated the NFT");
@@ -99,9 +129,10 @@ const CreateNftContainer = () => {
         <>
             <CreateNft
                 itemsMapping={itemsMapping}
+                searchResults={searchResults}
                 selectedItemsMapping={selectedItemsMapping}
                 handleItemSelection={handleItemSelection}
-                handleSearch={handleSearch}
+                handleSearch={debouncedHandleSearch}
                 handleCanEdit={handleCanEdit}
             />
             <Edit
@@ -109,6 +140,7 @@ const CreateNftContainer = () => {
                 handleCanEdit={handleCanEdit}
                 selectedItemsMapping={selectedItemsMapping}
                 updateItemsMapping={updateItemsMapping}
+                propertyValuesMapping={propertyValuesMapping}
             />
         </>
     );
