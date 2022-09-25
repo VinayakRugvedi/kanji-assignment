@@ -1,6 +1,9 @@
 import PropTypes from "prop-types";
 
-import {Item} from "./components";
+import {
+    Item,
+    Items
+} from "./components";
 
 const propTypes = {
     canEdit: PropTypes.bool.isRequired,
@@ -18,6 +21,7 @@ const Edit = ({
     propertyValuesMapping
 }) => {
     const isSingleItem = Object.keys(selectedItemsMapping).length === 1;
+    const isMultipleItems = Object.keys(selectedItemsMapping).length > 1;
 
     let item = {}
     if (isSingleItem) {
@@ -30,20 +34,27 @@ const Edit = ({
         handleCanEdit();
     };
 
-    return (
-        <>
-            {
-                (canEdit && isSingleItem) ? (
-                    <Item
-                        handleClose={handleClose}
-                        item={item}
-                        updateItemsMapping={updateItemsMapping}
-                        propertyValuesMapping={propertyValuesMapping}
-                    />
-                ) : null
-            }
-        </>
-    );
+    if (canEdit && isSingleItem) {
+        return (
+            <Item
+                handleClose={handleClose}
+                item={item}
+                updateItemsMapping={updateItemsMapping}
+                propertyValuesMapping={propertyValuesMapping}
+            />
+        );
+    }
+
+    if (canEdit && isMultipleItems) {
+        return (
+            <Items
+                handleClose={handleClose}
+                selectedItemsMapping={selectedItemsMapping}
+                updateItemsMapping={updateItemsMapping}
+                propertyValuesMapping={propertyValuesMapping}
+            />
+        );
+    }
 };
 
 Edit.propTypes = propTypes;
