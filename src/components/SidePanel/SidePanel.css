@@ -9,9 +9,10 @@
 
 .custom-side-panel-container .custom-side-panel-content {
     position: absolute;
-    width: 30vw;
+    width: 33vw;
     height: 100vh;
     top: 0;
     right: 0;
     background-color: white;
+    overflow-y: scroll;
 }
