@@ -36,7 +36,7 @@ const Items = ({
         const properties = selectedItemsMapping[key].properties, transformedStrings = [];
         for (let [name, values] of Object.entries(properties)) {
             values = values.map(value => `${value[0].toUpperCase()}${value.slice(1, value.length)}`);
-            const valuesString = values.join(" | ");
+            const valuesString = values.join(", ");
             const transformedString = `${name.toUpperCase()} - ${valuesString}`;
             transformedStrings.push(transformedString);
         }
@@ -44,7 +44,7 @@ const Items = ({
         itemsDescriptionContent.push(
             <div className="selected-item-details-container">
                 <p className="name">{selectedItemsMapping[key].name}</p>
-                <p className="properties">{transformedStrings.length > 0 ? `${transformedStrings.join(", ")}` : "No properties"}</p>
+                <p className="properties">{transformedStrings.length > 0 ? `${transformedStrings.join(" | ")}` : "No properties"}</p>
             </div>
         )
     }

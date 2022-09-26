@@ -19,9 +19,9 @@ const getTransformedNftItem = (item) => {
     const transformedValues = [];
     for (let valueItems of values) {
         valueItems = valueItems.map(valueItem => `${valueItem[0].toUpperCase()}${valueItem.slice(1, valueItem.length)}`);
-        transformedValues.push(valueItems.join(" | "));
+        transformedValues.push(valueItems.join(", "));
     }
-    item.propertyValuesString = transformedValues.length > 0 ? transformedValues.join(", ") : "";
+    item.propertyValuesString = transformedValues.length > 0 ? transformedValues.join(" | ") : "";
 
     return item;
 };
